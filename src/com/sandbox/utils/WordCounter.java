@@ -1,5 +1,6 @@
 package com.sandbox.utils;
 
+import java.io.File;
 import java.util.*;
 
 public class WordCounter implements Countable<String> {
@@ -21,6 +22,15 @@ public class WordCounter implements Countable<String> {
 
     public WordCounter(String source, char separator) {
         this(source);
+        this.separator = separator;
+    }
+
+    public WordCounter(File source) {
+        this(getFileContent(source));
+    }
+
+    public WordCounter(File source, char separator) {
+        this(getFileContent(source));
         this.separator = separator;
     }
 
