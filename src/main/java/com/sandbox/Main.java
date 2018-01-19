@@ -33,8 +33,8 @@ public class Main {
             System.out.print(word + " ");
 
         // Count words in a file
-        String filePath = "D:" + File.separator + "data" + File.separator + "document.txt";
+        /*String filePath = "D:" + File.separator + "data" + File.separator + "document.txt";
         File myTextFile = new File(filePath);
-        wordCounter = new WordCounter(myTextFile);
+        wordCounter = new WordCounter(myTextFile);*/
     }
 }
