@@ -91,7 +91,7 @@ public class WordCounter implements Countable<String> {
     }
 
     /**
-     * Counts all the words in the sourceseparated by the defined separator,
+     * Counts all the words in the source separated by the defined separator,
      * ignoring duplicated and trailing separators.
      * @return Total amount of words in the source text
      */
@@ -146,7 +146,7 @@ public class WordCounter implements Countable<String> {
      * @param Array of strings
      * @return Array of strings without empty strings
      */
-    private String[] removeEmptyStringsFromCollection(String[] sourceList) {
+    protected String[] removeEmptyStringsFromCollection(String[] sourceList) {
         List<String> cleanedList = new ArrayList<>();
 
         // Loop through the elements ignoring the empty ones
