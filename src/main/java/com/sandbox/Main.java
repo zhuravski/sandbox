@@ -1,5 +1,6 @@
 package com.sandbox;
 
+import com.sandbox.utils.FileReader;
 import com.sandbox.utils.WordCounter;
 
 import java.io.File;
@@ -21,7 +22,7 @@ public class Main {
         System.out.println(wordCounter.getTotal());
 
         // Count words with a specified separator
-        wordCounter = new WordCounter(myStr2);
+        wordCounter = new WordCounter(myStr2, '_');
         System.out.print("Total word counting: ");
         System.out.println(wordCounter.getTotal());
 
@@ -31,10 +32,18 @@ public class Main {
         System.out.println("List of words: ");
         for (String word : words)
             System.out.print(word + " ");
+        System.out.println("");
 
         // Count words in a file
-        /*String filePath = "D:" + File.separator + "data" + File.separator + "document.txt";
-        File myTextFile = new File(filePath);
-        wordCounter = new WordCounter(myTextFile);*/
+        String fileName = "D:/dev/data/document.txt";
+        FileReader fileReader = new FileReader(fileName);
+        String fileContent = fileReader.getFileContent();
+        System.out.println("\n\nThis is the content of '" + fileName + "':");
+        System.out.println(fileContent);
+
+        // Count words with a specified separator
+        wordCounter = new WordCounter(fileContent);
+        System.out.print("Total words in the file: ");
+        System.out.println(wordCounter.getTotal());
     }
 }

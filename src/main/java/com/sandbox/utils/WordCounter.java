@@ -37,28 +37,6 @@ public class WordCounter implements Countable<String> {
         this.separator = separator;
     }
 
-    /**
-     * Constructor to read from a file
-     * @param source The file object
-     */
-    public WordCounter(File source) {
-        this();
-        FileReader fileReader = new FileReader(source);
-        this.source = fileReader.getFileContent();
-    }
-
-    /**
-     * Constructor to read from a file with a specified separator
-     * @param source The file object
-     * @param separator Character to separate words
-     */
-    public WordCounter(File source, char separator) {
-        this();
-        FileReader fileReader = new FileReader(source);
-        this.source = fileReader.getFileContent();
-        this.separator = separator;
-    }
-
     @Override
     public void setSource(String source) {
         this.source = source;
@@ -107,7 +85,7 @@ public class WordCounter implements Countable<String> {
                     if (getSource().charAt(index) == getSeparator()) {
                         index++;
                     } else {
-                        // Increment word counter and continue until next separator
+                        // Word found: increment word counter and continue until next separator
                         total++;
                         while ((index < getSource().length() - 1) && (getSource().charAt(index) != getSeparator())) {
                             index++;
@@ -155,8 +133,6 @@ public class WordCounter implements Countable<String> {
                 cleanedList.add(item);
         }
 
-        String[] cleanedArray = new String[cleanedList.size()];
-
-        return cleanedList.toArray(cleanedArray);
+        return cleanedList.toArray(new String[cleanedList.size()]);
     }
 }

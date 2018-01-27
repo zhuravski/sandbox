@@ -8,8 +8,6 @@ import static org.testng.Assert.*;
 
 public class WordCounterTest {
 
-    WordCounter wordCounter;
-
     @BeforeMethod
     public void setUp() throws Exception {
 
@@ -17,11 +15,11 @@ public class WordCounterTest {
 
     @Test
     public void testGetWords() throws Exception {
-        String[] expected = {"test", "de", "la", "muerte"};
-        WordCounter wordCounter = new WordCounter("test de la muerte");
+        String[] expected = {"this", "is", "a", "list", "of", "words"};
+        WordCounter wordCounter = new WordCounter("  this is a list of words  ");
 
         String[] result = wordCounter.getWords();
-        Assert.assertEquals(expected, result);
+        Assert.assertEquals(result, expected);
     }
 
     @Test
@@ -33,6 +31,42 @@ public class WordCounterTest {
         WordCounter wordCounter = new WordCounter();
         result = wordCounter.removeEmptyStringsFromCollection(source);
 
-        assertEquals(expected, result);
+        assertEquals(result, expected);
+    }
+
+    @Test
+    public void testDoCount() {
+        String myString;
+        Long totalWords;
+        Long expected;
+        WordCounter wordCounter;
+
+        // No words
+        myString = "        ";
+        expected = 0L;
+        wordCounter = new WordCounter(myString);
+        totalWords = wordCounter.getTotal();
+        assertEquals(totalWords, expected);
+
+        // Spaced separated string with trailing spaces
+        myString = "   this is a normal string with   separators and trailing spaces    ";
+        expected = 10L;
+        wordCounter = new WordCounter(myString);
+        totalWords = wordCounter.getTotal();
+        assertEquals(totalWords, expected);
+
+        // Underscore separated string
+        myString = "____this_is_a_normal_string_with____separators_and_trailing_underscores_____";
+        expected = 10L;
+        wordCounter = new WordCounter(myString, '_');
+        totalWords = wordCounter.getTotal();
+        assertEquals(totalWords, expected);
+
+        // String with symbols and other blanks
+        myString = " #543ASd as#@%asGQW#$t _)(=-0- 23r3\tasf2 3r\n\r@#%@_!@)_   ";
+        expected = 5L;
+        wordCounter = new WordCounter(myString);
+        totalWords = wordCounter.getTotal();
+        assertEquals(totalWords, expected);
     }
 }

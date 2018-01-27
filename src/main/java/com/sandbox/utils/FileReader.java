@@ -1,25 +1,42 @@
 package com.sandbox.utils;
+
 import java.io.File;
-import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
+import java.util.Scanner;
+
+/**
+ * Gets the content of a file
+ */
 public class FileReader {
-    private String content;
-    private String path;
+    private String fileContent;
 
-    public FileReader() {
+    public FileReader(String fileName) {
+        StringBuilder fileContent = new StringBuilder();
 
+        try {
+            FileInputStream fileInput = new FileInputStream(fileName);
+            Scanner scanner = new Scanner(fileInput, "UTF-8");
+
+            try {
+                while (scanner.hasNextLine()) {
+                    fileContent.append(scanner.nextLine() + "\n");
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                scanner.close();
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        this.fileContent = fileContent.toString();
     }
-
-    public FileReader(File source) {
-        // TBD: Implement reading
-        this.content = "This is a mock string.";
-    }
-
-    public FileReader(String path) {
-        // TBD: Implement reading
-        this.content = "This is a mock string.";
-    }
-
 
     /**
      * Getter for the file content
@@ -27,7 +44,7 @@ public class FileReader {
      * @return A string with the file content
      */
     public String getFileContent() {
-        return this.content;
+        return this.fileContent;
     }
 
 }
